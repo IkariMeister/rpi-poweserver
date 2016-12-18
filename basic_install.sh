@@ -1,16 +1,31 @@
-sudo -s -p <password>
+sudo -s
 apt-get update && apt-get upgrade
-apt-get purge "lxc-docker*"
-apt-get purge "docker.io*"
-apt-get update
-apt-get install -y apt-transport-https ca-certificates gnupg2
-apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-rm /etc/apt/sources.list.d/docker.list
-cat deb https://apt.dockerproject.org/repo debian-jessie main > /etc/apt/sources.list.d/docker.list 
-apt-get update
-apt-cache policy docker-engine
-apt-get install docker-engine
+apt-get install build-essential
+apt-get install -y openssh-server
+service ssh start
+cd /usr/local/src
+wget http://curl.haxx.se/download/curl-7.36.0.tar.gz
+tar -xvzf curl-7.36.0.tar.gz
+rm *.gz
+cd curl-7.6.0
+./configure
+make
+make install
+apt-get install -y curl libcurl3
+curl -sSL https://get.docker.com/ | sh
 groupadd docker
 gpasswd -a ${USER} docker
 service docker start
-apt-get install git-core
+apt-get install -y git
+git config --global user.name Ikari
+git config --global user.email jcgseco@gmail.com
+cd $HOME
+git clone https://github.com/IkariMeister/rpi-poweserver.git
+cd rpi-poweserver
+git remote add rpi-powerserver https://github.com/IkariMeister/rpi-poweserver.git
+git fetch rpi-powerserver
+git checkout develop
+git pull
+
+
+
