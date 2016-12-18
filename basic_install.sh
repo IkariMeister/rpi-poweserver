@@ -1,4 +1,3 @@
-sudo -s
 apt-get update && apt-get upgrade
 apt-get install build-essential
 apt-get install -y openssh-server
@@ -7,7 +6,7 @@ cd /usr/local/src
 wget http://curl.haxx.se/download/curl-7.36.0.tar.gz
 tar -xvzf curl-7.36.0.tar.gz
 rm *.gz
-cd curl-7.6.0
+cd curl-7.36.0
 ./configure
 make
 make install
