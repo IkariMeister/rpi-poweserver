@@ -24,6 +24,11 @@ cd rpi-poweserver
 git remote add rpi-powerserver https://github.com/IkariMeister/rpi-poweserver.git
 git fetch rpi-powerserver
 git checkout rpi-powerserver/develop
+cp ./interfaces /etc/network/interfaces
+docker build -t commons/Dockerfile
+ocker run -d -p 80:80 commons/Dockerfile
+
+
 
 
 
