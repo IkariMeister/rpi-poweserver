@@ -1,5 +1,5 @@
-apt-get update && apt-get upgrade
-apt-get install build-essential
+apt-get update && apt-get upgrade -y
+apt-get install -y build-essential
 apt-get install -y openssh-server
 service ssh start
 cd /usr/local/src
@@ -7,7 +7,7 @@ wget http://curl.haxx.se/download/curl-7.36.0.tar.gz
 tar -xvzf curl-7.36.0.tar.gz
 rm *.gz
 cd curl-7.36.0
-./configure
+./configure --with-ssl
 make
 make install
 apt-get install -y curl libcurl3
@@ -23,8 +23,7 @@ git clone https://github.com/IkariMeister/rpi-poweserver.git
 cd rpi-poweserver
 git remote add rpi-powerserver https://github.com/IkariMeister/rpi-poweserver.git
 git fetch rpi-powerserver
-git checkout develop
-git pull
+git checkout rpi-powerserver/develop
 
 
 
