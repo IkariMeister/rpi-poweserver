@@ -25,8 +25,8 @@ git remote add rpi-powerserver https://github.com/IkariMeister/rpi-poweserver.gi
 git fetch rpi-powerserver
 git checkout rpi-powerserver/develop
 cp ./interfaces /etc/network/interfaces
-docker build -t commons/Dockerfile
-ocker run -d -p 80:80 commons/Dockerfile
+docker build -t commons-nginx ./commons/nginx/Dockerfile
+docker run --name nginx -it -p 80:80 -p 443:443 commons-nginx &
 
 
 
