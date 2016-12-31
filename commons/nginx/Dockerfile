@@ -1,25 +1,25 @@
-FROM cmosh/alpine-arm:3.3
+FROM resin/rpi-raspbian:jessie-20161228
+#FROM debian:jessie
 MAINTAINER jcgseco@gmail.com
 
-RUN [ "cross-build-start" ]
 ENV USER nginx
-#RUN apk update && apk add openssl && apk add useradd
-RUN adduser -D -u 1000 $USER \
+RUN apt-get update \
+ && apt-get upgrade -y \
+# && apt-get install -y build-essential && apt-get install -y wget \
+ && apt-get install -y nginx \
+ && apt-get install -y sudo \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN adduser --disabled-password $USER \
+ && passwd -d $USER \
  && echo "$USER ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
-RUN apk update \
- && apk upgrade \
-# && apk install build-essential && apk install -y wget \
- && apk add --update nginx && rm -rf /var/cache/apk/*
-# && apk clean \
-# && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /var/www/html && chmod 777 /var/www/html
 COPY ./index.html /var/www/html/
 COPY ./nginx.conf /etc/nginx/
+#USER www-data
 
-#RUN service nginx start && service nginx status
+#RUN sudo service nginx start
 
-
-RUN [ "cross-build-end" ]
-
+EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
