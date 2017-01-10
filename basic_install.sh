@@ -23,5 +23,7 @@ docker build -t commons-nginx .
 docker run --name nginx -it -p 80:80 -p 443:443 my_nginx &
 sudo mkdir /data/mysql
 sudo chmod 777 /data/mysql
-docker pull hypriot/rpi-mysql
-docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=ik2233 -p 3306:3306 -v /data/mysql:/var/lib/mysql -d hypriot/rpi-mysql
+cd ../../dbm/mysql
+#docker pull hypriot/rpi-mysql
+docker build -t my_mysql
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=ik2233 -p 3306:3306 -v /data/mysql:/var/lib/mysql -d my_mysql
