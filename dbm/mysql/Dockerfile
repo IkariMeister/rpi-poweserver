@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian:wheezy-20161228
+FROM resin/rpi-raspbian:jessie-20161228
 MAINTAINER jcgseco@gmail.com
 
 RUN groupadd -r mysql && useradd -r -g mysql mysql
