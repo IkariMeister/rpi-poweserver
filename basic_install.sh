@@ -21,3 +21,7 @@ sudo service docker start
 cd rpi-powerserver/commons/nginx
 docker build -t commons-nginx .
 docker run --name nginx -it -p 80:80 -p 443:443 my_nginx &
+sudo mkdir /data/mysql
+sudo chmod 777 /data/mysql
+docker pull hypriot/rpi-mysql
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=ik2233 -p 3306:3306 -v /data/mysql:/var/lib/mysql -d hypriot/rpi-mysql
