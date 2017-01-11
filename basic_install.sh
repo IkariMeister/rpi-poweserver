@@ -25,5 +25,19 @@ sudo mkdir /data/mysql
 sudo chmod 777 /data/mysql
 cd ../../dbm/mysql
 #docker pull hypriot/rpi-mysql
-docker build -t my_mysql
+docker build -t my_mysql .
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=ik2233 -p 3306:3306 -v /data/mysql:/var/lib/mysql -d my_mysql
+cd ../../downloads/transmission
+sudo mkdir /media/downloads && sudo mkdir /media/temp
+sudo chmod 777 /media/downloads && sudo chmod 777 /media/temp
+docker build -t transmission .
+docker run --name transmission --rm -v /media/downloads:/media/downloads -v /media/temp:/media/temp -p 9091:9091 -it transmission &
+cd ../amule
+docker build -t amule .
+docker run --name amule -it amule &
+cd ../pyload
+docker build -t pyload .
+docker run --name pyload -it pyload &
+cd ../../docs-manager/owncloud
+docker build -t myowncloud .
+docker run --name owncloud -it myowncloud &
