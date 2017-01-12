@@ -11,15 +11,19 @@ RUN apt-get update \
 
 RUN apt-get install -y amule-daemon
 
+RUN mkdir /media/temp && mkdir /media/incoming && chmod 777 /media/temp && chmod 777 /media/incoming
+
 USER $USER
 
-RUN cd && mkdir .aMule
+RUN amuled
 
-COPY ./amule.conf /home/$USER/.Amule/amule.conf
+#RUN cd && mkdir .aMule
+
+COPY ./amule.conf /home/$USER/.aMule/amule.conf
 COPY ./amule-daemon /etc/default/amule-daemon
 
 COPY entrypoint.sh /
-RUN sudo chmod 777 /entrypoint.sh
+RUN sudo chmod 777 /entrypoint.sh && sudo chmod 777 /home/$USER/.aMule/amule.conf
 
 EXPOSE 4662 4672 50001 1080 4712 4711
 

@@ -1,4 +1,4 @@
 #!/bin/bash
-sudo service amule-daemon start
+amuled
 /bin/bash
 echo hola mundo

@@ -33,8 +33,10 @@ sudo chmod 777 /media/downloads-t && sudo chmod 777 /media/temp-t
 docker build -t transmission .
 docker run --name transmission --rm -v /media/downloads-t:/media/downloads -v /media/temp-t:/media/temp -p 9091:9091 -it transmission &
 cd ../amule
+sudo mkdir /media/downloads-m && sudo mkdir /media/temp-m
+sudo chmod 777 /media/downloads-m && sudo chmod 777 /media/temp-m
 docker build -t amule .
-docker run --name amule -it amule &
+docker run --name amule -v /media/downloads-m:/media/downloads -v /media/temp-m:/media/temp -p 4711:4711 -p 4712:4712 -p 4662:4662 -p 4672:4672 -d amule
 cd ../pyload
 docker build -t pyload .
 docker run --name pyload -it pyload &
