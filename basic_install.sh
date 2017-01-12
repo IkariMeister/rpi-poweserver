@@ -28,10 +28,10 @@ cd ../../dbm/mysql
 docker build -t my_mysql .
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=ik2233 -p 3306:3306 -v /data/mysql:/var/lib/mysql -d my_mysql
 cd ../../downloads/transmission
-sudo mkdir /media/downloads && sudo mkdir /media/temp
-sudo chmod 777 /media/downloads && sudo chmod 777 /media/temp
+sudo mkdir /media/downloads-t && sudo mkdir /media/temp-t
+sudo chmod 777 /media/downloads-t && sudo chmod 777 /media/temp-t
 docker build -t transmission .
-docker run --name transmission --rm -v /media/downloads:/media/downloads -v /media/temp:/media/temp -p 9091:9091 -it transmission &
+docker run --name transmission --rm -v /media/downloads-t:/media/downloads -v /media/temp-t:/media/temp -p 9091:9091 -it transmission &
 cd ../amule
 docker build -t amule .
 docker run --name amule -it amule &
