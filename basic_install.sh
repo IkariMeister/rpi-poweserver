@@ -18,7 +18,9 @@ sudo apt-get install -y docker-engine
 groupadd docker 
 gpasswd -a ${USER} docker
 sudo service docker start
-cd rpi-powerserver/commons/nginx
+cd rpi-powerserver/basic-images/jre
+docker build -t jre-arm .
+cd ../../commons/nginx
 docker build -t commons-nginx .
 docker run --name nginx -it -p 80:80 -p 443:443 my_nginx &
 sudo mkdir /data/mysql
@@ -37,9 +39,10 @@ sudo mkdir /media/downloads-m && sudo mkdir /media/temp-m
 sudo chmod 777 /media/downloads-m && sudo chmod 777 /media/temp-m
 docker build -t amule .
 docker run --name amule -v /media/downloads-m:/media/downloads -v /media/temp-m:/media/temp -p 4711:4711 -p 4712:4712 -p 4662:4662 -p 4672:4672 -d amule
-cd ../pyload
-docker build -t pyload .
-docker run --name pyload -it pyload &
-cd ../../docs-manager/owncloud
-docker build -t myowncloud .
-docker run --name owncloud -it myowncloud &
+#cd ../pyload
+#docker build -t pyload .
+#docker run --name pyload -it pyload &
+#cd ../../docs-manager/owncloud
+#docker build -t myowncloud .
+#docker run --name owncloud -it myowncloud &
+
